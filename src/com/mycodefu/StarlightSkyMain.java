@@ -1,15 +1,19 @@
 package com.mycodefu;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Random;
 
 public class StarlightSkyMain extends JPanel implements KeyListener {
 
     public static void main(String[] args) {
         JFrame jframe = new JFrame();
+
         jframe.add(new StarlightSkyMain());
         jframe.pack();
 
@@ -60,6 +64,24 @@ public class StarlightSkyMain extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             drawStars(this.getGraphics());
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
+            saveScreenshot();
+        }
+    }
+
+    private void saveScreenshot() {
+        try {
+            Point topLeft = new Point(0, 0);
+            SwingUtilities.convertPointToScreen(topLeft, this);
+            Rectangle bounds = this.getBounds();
+            bounds.setLocation(topLeft);
+
+            BufferedImage capture = new Robot().createScreenCapture(bounds);
+            ImageIO.write(capture, "png", new File("sky.png"));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
