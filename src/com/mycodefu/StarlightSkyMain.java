@@ -77,8 +77,10 @@ public class StarlightSkyMain extends JPanel implements KeyListener {
             bounds.setLocation(topLeft);
 
             BufferedImage capture = new Robot().createScreenCapture(bounds);
-            ImageIO.write(capture, "png", new File("sky.png"));
+            File image = new File("sky.png");
+            ImageIO.write(capture, "png", image);
 
+            Desktop.getDesktop().open(image);
 
         } catch (Exception e) {
             e.printStackTrace();
