@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class StarlightSkyMain extends JPanel implements KeyListener {
@@ -43,13 +45,16 @@ public class StarlightSkyMain extends JPanel implements KeyListener {
 
         g.setColor(Color.WHITE);
 
+        List<Color> colors = Arrays.asList(Color.WHITE, new Color(154, 191, 249), new Color(249, 238, 154), new Color(237, 179, 249));
+
         Random random = new Random();
-        int numberOfStars = random.nextInt(500) + 500;
+        int numberOfStars = random.nextInt(200) + 300;
         for( int starNo = 0; starNo < numberOfStars; starNo++) {
             int diameter = random.nextInt(5) + 1;
             int starX = random.nextInt(this.getWidth() - 15);
             int starY = random.nextInt(this.getHeight() - 15);
 
+            g.setColor(colors.get(random.nextInt(4)));
 
             g.fillOval(starX, starY, diameter, diameter);
         }
